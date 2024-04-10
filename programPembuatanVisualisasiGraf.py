@@ -126,20 +126,23 @@ def rumus_4(n,d):
     #munculkan graf
     visualisasi_graf(nodes,edge)
 
-def visualisasi_graf(nodes,edges):
+def visualisasi_graf(nodes, edge):
     # Buat objek graf
-    G = nx.Graph()
+    G = nx.DiGraph()  # Menggunakan DiGraph untuk membuat graf menjadi berarah
 
     # Tambahkan node ke graf
     G.add_nodes_from(nodes)
 
-    # Tambahkan edge ke graf
-    G.add_edges_from(edges)
+    # Tukar posisi angka pada tuple edges untuk membuat arah panah menjadi terbalik
+    edge = [(destination, source) for (source, destination) in edge]
 
-    # Visualisasikan graf
-    nx.draw(G, with_labels=True, node_color='skyblue', node_size=2000, font_size=12, font_weight='bold')
-    plt.title("Contoh Visualisasi Graf")
-    plt.show()  
+    # Tambahkan edge ke graf
+    G.add_edges_from(edge)
+
+    # Visualisasikan graf dengan panah (graf berarah)
+    nx.draw(G, with_labels=True, node_color='skyblue', node_size=2000, font_size=12, font_weight='bold', arrows=True)
+    plt.title("Contoh Visualisasi Graf Berarah")
+    plt.show()
 
 # -----------------------------
 
